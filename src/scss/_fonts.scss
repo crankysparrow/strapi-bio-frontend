@@ -1,0 +1,56 @@
+@import './variables';
+h1,
+.h1 {
+	font-size: size(90);
+	line-height: 1;
+	font-weight: 500;
+}
+
+h2,
+.h2 {
+	font-size: size(63);
+	line-height: 1.2;
+	font-weight: 400;
+}
+
+h3,
+.h3 {
+	font-size: size(45);
+	line-height: 1.2;
+	font-weight: 400;
+}
+
+h4,
+.h4 {
+	font-size: size(31);
+	line-height: 1.2;
+	font-weight: 400;
+}
+
+h5,
+.h5 {
+	font-size: size(22);
+	line-height: 1.2;
+	font-weight: 400;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5 {
+	color: $white;
+	margin: 0 0 1rem;
+}
+
+html,
+body {
+	font-size: size(16);
+	line-height: 1.5;
+	font-weight: 400;
+}
