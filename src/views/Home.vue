@@ -38,7 +38,7 @@ export default {
 		Hero,
 	},
 	mounted() {
-		this.$http.get('http://localhost:1337/home').then((res) => {
+		this.$http.get(`${process.env.VUE_APP_STRAPI_URI}/home`).then((res) => {
 			this.hero = res?.data?.hero
 			this.pageContent = res?.data?.pageContent
 		})
