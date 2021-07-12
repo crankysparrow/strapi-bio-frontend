@@ -26,19 +26,21 @@ const routes = [
 		component: () => import('../views/Science.vue'),
 	},
 	{
-		path: '/press/:slug',
-		name: 'Press Releases',
-		component: () => import('../views/PressRelease.vue'),
-	},
-	{
 		path: '/press',
 		name: 'Press Releases',
 		component: () => import('../views/PressReleases.vue'),
 		children: [
 			{
-				path: 'p/:page',
-				name: 'Press Releases',
+				path: '',
 				component: () => import('../views/PressList.vue'),
+			},
+			{
+				path: 'p/:page',
+				component: () => import('../views/PressList.vue'),
+			},
+			{
+				path: ':slug',
+				component: () => import('../views/PressRelease.vue'),
 			},
 		],
 	},

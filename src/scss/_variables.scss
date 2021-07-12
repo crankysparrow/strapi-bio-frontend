@@ -1,3 +1,5 @@
+@use "sass:math";
+
 $dark: #0f0e17;
 $white: #fffffe;
 $gray: #b7bad1;
@@ -11,7 +13,7 @@ $purple2: #a17ec8;
 $ease_out_back: cubic-bezier(0.34, 1.56, 0.64, 1);
 
 @function size($val: 16px) {
-	@return ($val / 16) * 1rem;
+	@return (math.div($val, 16)) * 1rem;
 }
 
 @mixin xs {

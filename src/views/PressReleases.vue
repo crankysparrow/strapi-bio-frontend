@@ -4,11 +4,6 @@
 
 		<div class="press-content">
 			<router-view></router-view>
-
-			<div class="press-bottom">
-				<!-- <Pattern :colors="colors" /> -->
-				<Brain />
-			</div>
 		</div>
 	</div>
 </template>
@@ -16,8 +11,6 @@
 <script>
 import {getStrapiMedia} from '../utils/getStrapiMedia'
 import Hero from '../components/Hero.vue'
-import Pattern from '../components/Pattern.vue'
-import Brain from '../components/Brain.vue'
 
 export default {
 	name: 'Press Releases',
@@ -40,24 +33,6 @@ export default {
 	},
 	components: {
 		Hero,
-		Pattern,
-		Brain,
-	},
-	mounted() {
-		// this.$http.get('http://localhost:1337/press-releases/count').then((res) => {
-		// 	if (res.data) {
-		// 		this.totalPages = Math.ceil(res.data / 10)
-		// 	}
-		// })
-		// let getUrl = 'http://localhost:1337/press-releases?_sort=date:desc&_limit=10'
-		// let page = this.$route?.query?.p
-		// if (page) {
-		// 	this.page = page
-		// 	getUrl += '&_start=' + (page - 1) * 10
-		// }
-		// this.$http.get(getUrl).then((res) => {
-		// 	this.press = res?.data
-		// })
 	},
 }
 </script>

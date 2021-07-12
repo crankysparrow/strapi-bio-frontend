@@ -19,7 +19,7 @@
 		<div v-if="totalPages > 0" class="pagination">
 			<div class="current-marker" :style="'--left: ' + 36 * (page - 1) + 'px;'"></div>
 			<div v-for="n in totalPages" :class="n == page ? 'page current' : 'page'">
-				<router-link :to="'/press/p/' + n">{{ n }}</router-link>
+				<router-link :to="'/press/p/' + n" @click="updatePage(n)">{{ n }}</router-link>
 			</div>
 		</div>
 	</div>
@@ -34,6 +34,16 @@ export default {
 			totalPages: 1,
 			page: 1,
 		}
+	},
+	methods: {
+		updatePage(newPage) {
+			let getUrl = `${process.env.VUE_APP_STRAPI_URI}/press-releases?_sort=date:desc&_limit=10`
+			this.page = newPage
+			getUrl += '&_start=' + (this.page - 1) * 10
+			this.$http.get(getUrl).then((res) => {
+				this.press = res?.data
+			})
+		},
 	},
 	mounted() {
 		this.page = this.$route?.params?.page
@@ -113,8 +123,9 @@ export default {
 		color: $dark;
 		display: grid;
 		grid-template-rows: repeat(2, min-content);
-		grid-template-columns: auto 80px;
+		grid-template-columns: 1fr 80px;
 		margin-bottom: 50px;
+		max-width: 100%;
 		.date {
 			grid-row: 1;
 			grid-column: 1;
@@ -124,6 +135,7 @@ export default {
 		}
 		h3 {
 			grid-row: 2;
+			grid-column: 1;
 			color: $dark;
 			margin-bottom: 0;
 			transition: all 200ms linear;
@@ -152,7 +164,7 @@ export default {
 			}
 		}
 		@include md {
-			grid-template-columns: max-content 130px;
+			grid-template-columns: 1fr 130px;
 		}
 	}
 }
