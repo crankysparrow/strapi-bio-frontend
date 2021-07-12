@@ -42,7 +42,7 @@ export default {
 		}
 	},
 	mounted() {
-		this.$http.get('http://localhost:1337/teams').then((res) => {
+		this.$http.get(`${process.env.VUE_APP_STRAPI_URI}/teams`).then((res) => {
 			this.teamMembers = res?.data
 		})
 	},
