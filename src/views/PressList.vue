@@ -17,9 +17,9 @@
 		</div>
 
 		<div v-if="totalPages > 0" class="pagination">
-			<div class="current-marker" :style="'--left: ' + 36 * (page - 1) + 'px;'"></div>
+			<div :class="{'current-marker': true, hovered: markerHovered}" :style="'--left: ' + 36 * (markerLeft - 1) + 'px;'"></div>
 			<div v-for="n in totalPages" :class="n == page ? 'page current' : 'page'">
-				<router-link :to="'/press/p/' + n" @click="updatePage(n)">{{ n }}</router-link>
+				<router-link :to="'/press/p/' + n" @click="updatePage(n)" @mouseover="hoverPage(n)" @mouseleave="unHoverPage()">{{ n }}</router-link>
 			</div>
 		</div>
 	</div>
@@ -33,29 +33,42 @@ export default {
 			press: [],
 			totalPages: 1,
 			page: 1,
+			pageLimit: 6,
+			markerHovered: false,
+			markerLeft: 1,
 		}
 	},
 	methods: {
 		updatePage(newPage) {
-			let getUrl = `${process.env.VUE_APP_STRAPI_URI}/press-releases?_sort=date:desc&_limit=10`
+			let getUrl = `${process.env.VUE_APP_STRAPI_URI}/press-releases?_sort=date:desc&_limit=${this.pageLimit}`
 			this.page = newPage
-			getUrl += '&_start=' + (this.page - 1) * 10
+			this.markerLeft = this.page
+			getUrl += '&_start=' + (this.page - 1) * this.pageLimit
 			this.$http.get(getUrl).then((res) => {
 				this.press = res?.data
 			})
 		},
+		hoverPage(page) {
+			this.markerLeft = page
+			this.markerHovered = true
+		},
+		unHoverPage() {
+			this.markerLeft = this.page
+			this.markerHovered = false
+		},
 	},
 	mounted() {
 		this.page = this.$route?.params?.page
+		this.markerLeft = this.page
 		this.$http.get(`${process.env.VUE_APP_STRAPI_URI}/press-releases/count`).then((res) => {
 			if (res.data) {
-				this.totalPages = Math.ceil(res.data / 10)
+				this.totalPages = Math.ceil(res.data / this.pageLimit)
 			}
 		})
 
-		let getUrl = `${process.env.VUE_APP_STRAPI_URI}/press-releases?_sort=date:desc&_limit=10`
+		let getUrl = `${process.env.VUE_APP_STRAPI_URI}/press-releases?_sort=date:desc&_limit=${this.pageLimit}`
 		if (this.page) {
-			getUrl += '&_start=' + (this.page - 1) * 10
+			getUrl += '&_start=' + (this.page - 1) * this.pageLimit
 		}
 
 		this.$http.get(getUrl).then((res) => {
@@ -71,7 +84,7 @@ export default {
 	position: relative;
 	// transition: height 200ms linear;
 	.pagination {
-		color: $dark;
+		// color: $dark;
 		display: inline-flex;
 		flex-direction: row;
 		justify-content: center;
@@ -82,14 +95,18 @@ export default {
 			position: absolute;
 			width: 40px;
 			height: 40px;
-			border: 1px solid $orange;
+			border: 2px solid var(--text-primary);
 			border-radius: 50%;
 			top: -2px;
 			left: 0;
 			display: block;
 			z-index: -1;
 			transform: translateX(calc(var(--left) - 2px));
-			transition: transform 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+			transition: all 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+			&.hovered {
+				transform: translateX(calc(var(--left) - 2px)) scale(0.9);
+				background: var(--text-primary);
+			}
 		}
 		.page {
 			flex: 0 0 36px;
@@ -99,11 +116,19 @@ export default {
 				height: 36px;
 				align-items: center;
 				justify-content: center;
-				color: $tertiary;
+				color: var(--accent);
 				font-size: size(24);
+				&:hover,
+				&:focus {
+				}
 			}
 			&.current {
 				a {
+					color: var(--accent-tertiary);
+					&:hover,
+					&:focus {
+						// color: $purple;
+					}
 				}
 			}
 		}
@@ -117,38 +142,50 @@ export default {
 		text-align: left;
 		position: relative;
 		z-index: 1;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		align-items: stretch;
+		.press-item {
+			flex: 0 0 48%;
+			margin-bottom: 2rem;
+		}
 	}
 	.press-item-link {
-		padding: 20px 0;
-		color: $dark;
+		height: 100%;
+		padding: 20px;
+		// color: $dark;
 		display: grid;
-		grid-template-rows: repeat(2, min-content);
+		grid-template-rows: min-content 1fr;
 		grid-template-columns: 1fr 80px;
-		margin-bottom: 50px;
 		max-width: 100%;
+		background: var(--bg-secondary);
 		.date {
 			grid-row: 1;
 			grid-column: 1;
 			font-size: size(18);
 			font-weight: 600;
 			margin-bottom: 5px;
+			color: var(--accent-tertiary);
 		}
 		h3 {
 			grid-row: 2;
 			grid-column: 1;
-			color: $dark;
+			// color: $dark;
 			margin-bottom: 0;
 			transition: all 200ms linear;
 		}
 		.arrow {
 			grid-row: 1 / 3;
 			grid-column: 2;
+			align-self: center;
 			opacity: 0;
-			transition: all 300ms ease-out;
+			transition: all 1s cubic-bezier(0.34, 1.56, 0.64, 1);
 			margin-left: 50px;
 			transform: translateX(-50px);
 			svg path {
-				fill: $tertiary;
+				fill: var(--accent-tertiary);
 			}
 		}
 
@@ -156,7 +193,9 @@ export default {
 		&:focus {
 			h3 {
 				text-decoration: underline;
-				text-decoration-color: $tertiary;
+				text-decoration-color: var(--accent-tertiary);
+				text-decoration-thickness: 2px;
+				text-underline-offset: 5px;
 			}
 			.arrow {
 				opacity: 1;

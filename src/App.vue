@@ -1,4 +1,5 @@
 <template>
+	<ThemeSwitch />
 	<Nav :navActive="navActive" :hamActive="hamActive" :navLinks="navLinks" v-on:menutoggle="menuToggle" v-on:linkclicked="closeMenuAfterClick" />
 	<router-view v-slot="{Component}">
 		<transition :name="$route.meta.transitionName || 'fade'" :mode="$route.meta.transitionMode || 'out-in'">
@@ -11,6 +12,7 @@
 <script>
 import Nav from './components/Nav.vue'
 import Footer from './components/Footer.vue'
+import ThemeSwitch from './components/ThemeSwitch.vue'
 
 export default {
 	name: 'App',
@@ -49,6 +51,7 @@ export default {
 	components: {
 		Nav,
 		Footer,
+		ThemeSwitch,
 	},
 }
 </script>
@@ -56,24 +59,24 @@ export default {
 <style lang="scss">
 body {
 	margin: 0;
-	background: $dark;
+	background: var(--bg-primary);
 }
 #app {
 	font-family: Space Grotesk, Helvetica, Arial, sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	text-align: center;
-	color: $gray;
+	color: var(--text-primary);
 	width: 100vw;
 }
 
 a {
 	font-weight: bold;
-	color: $orange;
+	color: var(--accent);
 	text-decoration: none;
 	&:hover,
 	&:focus {
-		color: $secondary;
+		color: var(--accent-secondary);
 	}
 }
 

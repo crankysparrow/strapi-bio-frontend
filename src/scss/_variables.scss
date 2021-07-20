@@ -9,6 +9,28 @@ $secondary: #f25f4c;
 $tertiary: #e53170;
 $purple: #b300bb;
 $purple2: #a17ec8;
+$darkblue: #1c147a;
+
+:root {
+	--bg-primary: #{$dark};
+	--bg-secondary: #{$darkblue};
+	--text-primary: #{$white};
+	--text-secondary: #{$gray};
+	--accent: #{$orange};
+	--accent-secondary: #{$secondary};
+	--accent-tertiary: #{$tertiary};
+	--contrastSize: 8rem;
+}
+
+:root.light-theme {
+	--bg-primary: #{$white};
+	--bg-secondary: #{$gray};
+	--text-primary: #{$dark};
+	--text-secondary: #{$tertiary};
+	--accent: #{$orange};
+	--accent-secondary: #{$secondary};
+	--accent-tertiary: #{$orange};
+}
 
 $ease_out_back: cubic-bezier(0.34, 1.56, 0.64, 1);
 

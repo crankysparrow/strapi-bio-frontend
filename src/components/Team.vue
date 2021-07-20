@@ -9,10 +9,7 @@
 				<div v-for="member in teamMembers" :key="member.id" class="team-list-member">
 					<router-link :to="'/team/' + member.id">
 						<div class="headshot">
-							<img
-								v-if="member.headshot"
-								:src="getStrapiMedia(member.headshot.url)"
-							/>
+							<img v-if="member.headshot" :src="getStrapiMedia(member.headshot.url)" />
 						</div>
 						<h4>{{ member.name }}</h4>
 						<div class="h5">{{ member.jobTitle }}</div>
@@ -56,8 +53,8 @@ export default {
 .team {
 	padding-top: 100px;
 	padding-bottom: 100px;
-	background: $gray;
-	color: $dark;
+	// background: $gray;
+	// color: $dark;
 	width: 100vw;
 	max-width: 100vw;
 	position: relative;
@@ -88,7 +85,7 @@ export default {
 				}
 				h4,
 				.h5 {
-					color: $dark;
+					// color: $dark;
 					margin-bottom: 10px;
 					line-height: 1;
 					text-align: right;

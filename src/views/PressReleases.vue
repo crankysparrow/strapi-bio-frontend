@@ -14,22 +14,27 @@ import Hero from '../components/Hero.vue'
 
 export default {
 	name: 'Press Releases',
+	data() {
+		return {
+			pageLimit: 5,
+		}
+	},
 	methods: {
 		getStrapiMedia,
 		getResults() {},
-		updatePagination(newPage) {
-			this.page = newPage
-			let getUrl = `${process.env.VUE_APP_STRAPI_URI}/press-releases?_sort=date:desc&_limit=10`
-			getUrl += '&_start=' + (newPage - 1) * 10
-			this.$http.get(getUrl).then((res) => {
-				this.press = res?.data
-				setTimeout(() => {
-					let newHeight = getComputedStyle(list).height
-					console.log(newHeight)
-				}, 1000)
-				// list.style.height = 'auto'
-			})
-		},
+		// updatePagination(newPage) {
+		// 	this.page = newPage
+		// 	let getUrl = `${process.env.VUE_APP_STRAPI_URI}/press-releases?_sort=date:desc&_limit=${this.pageLimit}`
+		// 	getUrl += '&_start=' + (newPage - 1) * this.pageLimit
+		// 	this.$http.get(getUrl).then((res) => {
+		// 		this.press = res?.data
+		// 		setTimeout(() => {
+		// 			let newHeight = getComputedStyle(list).height
+		// 			console.log(newHeight)
+		// 		}, 1000)
+		// 		// list.style.height = 'auto'
+		// 	})
+		// },
 	},
 	components: {
 		Hero,
@@ -39,7 +44,7 @@ export default {
 
 <style scoped="true" lang="scss">
 .press-content {
-	background: $gray;
+	// background: $gray;
 	width: 100%;
 	overflow: hidden;
 	position: relative;

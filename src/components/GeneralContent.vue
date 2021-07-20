@@ -115,11 +115,11 @@ export default {
 
 <style lang="scss">
 .block#neuroimaging {
-	background: $gray;
-	color: $dark;
-	h2 {
-		color: $dark;
-	}
+	// background: $gray;
+	// color: $dark;
+	// h2 {
+	// 	color: $dark;
+	// }
 	p:last-child {
 		text-align: right;
 		margin-top: 80px;
@@ -150,7 +150,6 @@ export default {
 		}
 	}
 	@include lg {
-		padding-top: 150px;
 		.img {
 			padding-top: 100px;
 		}

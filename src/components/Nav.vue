@@ -6,9 +6,7 @@
 			<div class="menu" v-if="navActive">
 				<ul>
 					<li v-for="link in navLinks" :key="link.url">
-						<router-link :to="link.url" @click="linkClicked">{{
-							link.name
-						}}</router-link>
+						<router-link :to="link.url" @click="linkClicked">{{ link.name }}</router-link>
 					</li>
 				</ul>
 			</div>
@@ -68,7 +66,7 @@ export default {
 .menu {
 	padding-top: 15vh;
 	position: fixed;
-	background: $secondary;
+	background: var(--bg-secondary);
 	width: 100%;
 	max-width: 550px;
 	height: 100%;
@@ -84,7 +82,7 @@ export default {
 			margin: 30px;
 			a {
 				font-size: size(40);
-				color: $white;
+				color: var(--text-primary);
 				position: relative;
 				display: block;
 				z-index: 0;
@@ -95,7 +93,7 @@ export default {
 					position: absolute;
 					width: 100%;
 					height: calc(100% - 10px);
-					background: white;
+					background: var(--text-primary);
 					left: 0;
 					z-index: -1;
 					transform: scaleX(0);
@@ -104,7 +102,7 @@ export default {
 				}
 				&:hover,
 				&:focus {
-					color: $secondary;
+					color: var(--bg-secondary);
 					&:before {
 						transform: scaleX(1);
 					}
