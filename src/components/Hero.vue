@@ -65,8 +65,6 @@ export default {
 	.hero-inner {
 		position: relative;
 		display: flex;
-		padding-bottom: 100px;
-		padding-top: 60px;
 		flex-direction: column;
 	}
 	h1 {
@@ -88,35 +86,16 @@ export default {
 			margin: 0 auto;
 			height: 100%;
 		}
-		.image {
-			flex: 0 0 40%;
-			padding-right: 50px;
-			img {
-				max-width: 400px;
-				margin-left: auto;
-			}
+		svg {
+			// flex: 0 0 30%;
+			max-width: 500px;
+			// margin-left: auto;
 		}
+
 		h1 {
 			flex: 0 0 40%;
-			margin-top: 100px;
+			padding-bottom: 5%;
 			align-self: flex-end;
-		}
-	}
-	&.home {
-		@include sm {
-			.hero-inner {
-				min-height: 500px;
-			}
-		}
-		@include md {
-			min-height: 700px;
-			.hero-inner {
-				padding-bottom: 200px;
-				min-height: 700px;
-			}
-		}
-		h1 {
-			// align-self: flex-start;
 		}
 	}
 }

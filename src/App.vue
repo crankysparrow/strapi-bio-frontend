@@ -70,9 +70,9 @@ body {
 	text-align: center;
 	color: var(--text-primary);
 	width: 100vw;
-	padding-top: 60px;
+	// padding-top: 60px;
 	@include md {
-		padding-top: 80px;
+		// padding-top: 80px;
 	}
 }
 
