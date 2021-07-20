@@ -3,7 +3,11 @@
 		<Hero title="Press Releases" :home="false" />
 
 		<div class="press-content">
-			<router-view></router-view>
+			<router-view v-slot="{Component}">
+				<transition name="pressFade" mode="out-in">
+					<component :is="Component" />
+				</transition>
+			</router-view>
 		</div>
 	</div>
 </template>
@@ -22,19 +26,6 @@ export default {
 	methods: {
 		getStrapiMedia,
 		getResults() {},
-		// updatePagination(newPage) {
-		// 	this.page = newPage
-		// 	let getUrl = `${process.env.VUE_APP_STRAPI_URI}/press-releases?_sort=date:desc&_limit=${this.pageLimit}`
-		// 	getUrl += '&_start=' + (newPage - 1) * this.pageLimit
-		// 	this.$http.get(getUrl).then((res) => {
-		// 		this.press = res?.data
-		// 		setTimeout(() => {
-		// 			let newHeight = getComputedStyle(list).height
-		// 			console.log(newHeight)
-		// 		}, 1000)
-		// 		// list.style.height = 'auto'
-		// 	})
-		// },
 	},
 	components: {
 		Hero,
@@ -48,7 +39,6 @@ export default {
 	width: 100%;
 	overflow: hidden;
 	position: relative;
-	// z-index: 1;
 	.press-bottom {
 		svg {
 			display: block;
@@ -63,5 +53,19 @@ export default {
 
 .press-releases {
 	position: relative;
+}
+
+.pressFade-enter-to,
+.pressFade-leave-from {
+	opacity: 1;
+}
+
+.pressFade-enter-active,
+.pressFade-leave-active {
+	transition: opacity 500ms linear;
+}
+.pressFade-enter-from,
+.pressFade-leave-active {
+	opacity: 0;
 }
 </style>
