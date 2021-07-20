@@ -171,7 +171,7 @@ export default {
 		}
 		@include xl {
 			max-width: 1500px;
-			margin-left: auto;
+			margin: 0 auto;
 			.team-list {
 				.team-list-member {
 					flex: 0 0 280px;

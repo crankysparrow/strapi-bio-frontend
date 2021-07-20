@@ -6,7 +6,8 @@ $gray: #b7bad1;
 $gray2: #9fa3c1;
 $orange: #ff8906;
 $secondary: #f25f4c;
-$tertiary: #e53170;
+// $tertiary: #e53170;
+$tertiary: #da1b5e;
 $purple: #b300bb;
 $purple2: #a17ec8;
 $darkblue: #1c147a;
@@ -19,7 +20,7 @@ $darkblue: #1c147a;
 	--accent: #{$orange};
 	--accent-secondary: #{$secondary};
 	--accent-tertiary: #{$tertiary};
-	--contrastSize: 8rem;
+	--contrastSize: 4rem;
 }
 
 :root.light-theme {

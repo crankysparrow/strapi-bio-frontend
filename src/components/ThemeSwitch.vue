@@ -11,7 +11,7 @@
 
 <script>
 export default {
-	name: 'ContrastSwitch',
+	name: 'ThemeSwitch',
 	data() {
 		return {
 			userTheme: 'dark-theme',
@@ -33,7 +33,7 @@ export default {
 <style lang="scss" scoped>
 .contrast-switch {
 	position: absolute;
-	top: 2rem;
+	top: 0px;
 	left: 2rem;
 }
 .switch-checkbox {

@@ -5,6 +5,7 @@
 			<div class="content">
 				{{ item.content }}
 			</div>
+			<router-link class="back" to="/press">Back to Press Releases</router-link>
 		</div>
 	</div>
 </template>
@@ -17,11 +18,10 @@ export default {
 			item: {},
 		}
 	},
-	mounted() {
+	created() {
 		let slug = this.$route?.params?.slug
 		let getUrl = `${process.env.VUE_APP_STRAPI_URI}/press-releases?slug=${slug}`
 		this.$http.get(getUrl).then((res) => {
-			console.log(res)
 			this.item = res.data[0]
 		})
 	},
@@ -38,7 +38,12 @@ export default {
 		margin: 0 auto;
 		position: relative;
 		padding-top: 100px;
-		padding-bottom: 200px;
+		padding-bottom: 50px;
+		.back {
+			display: inline-block;
+			margin-top: 100px;
+			font-size: 1.5rem;
+		}
 	}
 	.content {
 		color: white;

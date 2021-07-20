@@ -28,11 +28,9 @@ export default {
 		}
 	},
 	mounted() {
-		this.$http
-			.get(`${process.env.VUE_APP_STRAPI_URI}/teams/${this.$route.params.id}`)
-			.then((res) => {
-				this.member = res?.data
-			})
+		this.$http.get(`${process.env.VUE_APP_STRAPI_URI}/teams/${this.$route.params.id}`).then((res) => {
+			this.member = res?.data
+		})
 	},
 	methods: {
 		getStrapiMedia,
@@ -90,7 +88,7 @@ export default {
 }
 
 .team-member {
-	background: $dark;
+	background: var(--bg-secondary);
 	width: 100vw;
 	height: 100vh;
 	position: fixed;

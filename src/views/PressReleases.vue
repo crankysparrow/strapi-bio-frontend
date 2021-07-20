@@ -2,9 +2,9 @@
 	<div class="press-releases">
 		<Hero title="Press Releases" :home="false" />
 
-		<div class="press-content">
+		<div class="press-content" :style="{height: containerHeight}">
 			<router-view v-slot="{Component}">
-				<transition name="pressFade" mode="out-in">
+				<transition name="pressFade" mode="out-in" @beforeLeave="beforeLeave" @afterEnter="afterEnter">
 					<component :is="Component" />
 				</transition>
 			</router-view>
@@ -20,12 +20,23 @@ export default {
 	name: 'Press Releases',
 	data() {
 		return {
-			pageLimit: 5,
+			prevHeight: 0,
+			containerHeight: 'auto',
 		}
 	},
 	methods: {
 		getStrapiMedia,
-		getResults() {},
+		beforeLeave(element) {
+			this.prevHeight = getComputedStyle(element).height
+			this.containerHeight = this.prevHeight
+		},
+		afterEnter(element) {
+			const {height} = getComputedStyle(element)
+			this.containerHeight = height
+			setTimeout(() => {
+				this.containerHeight = 'auto'
+			}, 1000)
+		},
 	},
 	components: {
 		Hero,
@@ -39,6 +50,7 @@ export default {
 	width: 100%;
 	overflow: hidden;
 	position: relative;
+	transition: height 500ms ease;
 	.press-bottom {
 		svg {
 			display: block;
@@ -62,7 +74,8 @@ export default {
 
 .pressFade-enter-active,
 .pressFade-leave-active {
-	transition: opacity 500ms linear;
+	transition: all 500ms linear;
+	overflow: hidden;
 }
 .pressFade-enter-from,
 .pressFade-leave-active {

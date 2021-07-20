@@ -56,9 +56,11 @@ export default {
 		top: 0;
 		right: 0;
 		z-index: 999;
+		height: 60px;
+		width: 60px;
 		@include md {
-			top: 40px;
-			right: 40px;
+			height: 80px;
+			width: 80px;
 		}
 	}
 }

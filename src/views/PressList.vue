@@ -1,19 +1,21 @@
 <template>
 	<div class="press-list">
 		<div class="press-list-inner">
-			<div v-for="item in press" :key="item.id" class="press-item">
-				<router-link :to="'/press/' + item.slug" class="press-item-link">
-					<div class="date">{{ item.date }}</div>
-					<h3 class="h4">{{ item.title }}</h3>
-					<div class="arrow">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-							<path
-								d="M 5.4980469 3.0371094 L 4.0957031 4.4628906 L 11.744141 11.998047 L 4.0507812 19.535156 L 5.4492188 20.964844 L 14.597656 12.001953 L 5.4980469 3.0371094 z M 11.333984 3.0449219 L 9.9160156 4.4550781 L 17.423828 12.005859 L 10.035156 19.550781 L 11.464844 20.949219 L 20.234375 11.994141 L 11.333984 3.0449219 z"
-							></path>
-						</svg>
-					</div>
-				</router-link>
-			</div>
+			<transition-group name="pressItems">
+				<div v-for="item in press" :key="item.id" class="press-item">
+					<router-link :to="'/press/' + item.slug" class="press-item-link">
+						<div class="date">{{ item.date }}</div>
+						<h3 class="h4">{{ item.title }}</h3>
+						<div class="arrow">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+								<path
+									d="M 5.4980469 3.0371094 L 4.0957031 4.4628906 L 11.744141 11.998047 L 4.0507812 19.535156 L 5.4492188 20.964844 L 14.597656 12.001953 L 5.4980469 3.0371094 z M 11.333984 3.0449219 L 9.9160156 4.4550781 L 17.423828 12.005859 L 10.035156 19.550781 L 11.464844 20.949219 L 20.234375 11.994141 L 11.333984 3.0449219 z"
+								></path>
+							</svg>
+						</div>
+					</router-link>
+				</div>
+			</transition-group>
 		</div>
 
 		<div v-if="totalPages > 0" class="pagination">
@@ -65,12 +67,10 @@ export default {
 				this.totalPages = Math.ceil(res.data / this.pageLimit)
 			}
 		})
-
 		let getUrl = `${process.env.VUE_APP_STRAPI_URI}/press-releases?_sort=date:desc&_limit=${this.pageLimit}`
 		if (this.page) {
 			getUrl += '&_start=' + (this.page - 1) * this.pageLimit
 		}
-
 		this.$http.get(getUrl).then((res) => {
 			this.press = res?.data
 		})
@@ -80,7 +80,7 @@ export default {
 
 <style scoped="true" lang="scss">
 .press-list {
-	padding-bottom: 150px;
+	padding-bottom: 100px;
 	position: relative;
 	// transition: height 200ms linear;
 	.pagination {
@@ -90,6 +90,7 @@ export default {
 		justify-content: center;
 		position: relative;
 		z-index: 1;
+		margin-top: 100px;
 		.current-marker {
 			--left: 0;
 			position: absolute;
@@ -116,15 +117,16 @@ export default {
 				height: 36px;
 				align-items: center;
 				justify-content: center;
-				color: var(--accent);
+				color: var(--text-secondary);
 				font-size: size(24);
 				&:hover,
 				&:focus {
+					color: var(--accent-tertiary);
 				}
 			}
 			&.current {
 				a {
-					color: var(--accent-tertiary);
+					// color: var(--accent-tertiary);
 					&:hover,
 					&:focus {
 						// color: $purple;
@@ -132,6 +134,21 @@ export default {
 				}
 			}
 		}
+	}
+	.pressItems-enter-active,
+	.pressItems-leave-active {
+		transition: all 1s ease;
+	}
+
+	.pressItems-enter-active {
+		transition-delay: 1s;
+	}
+	.pressItems-enter-from,
+	.pressItems-leave-to {
+		opacity: 0;
+	}
+	.pressItems-leave-active {
+		// position: absolute;
 	}
 	.press-list-inner {
 		padding-left: 50px;

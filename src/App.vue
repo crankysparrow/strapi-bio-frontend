@@ -1,6 +1,8 @@
 <template>
-	<ThemeSwitch />
-	<Nav :navActive="navActive" :hamActive="hamActive" :navLinks="navLinks" v-on:menutoggle="menuToggle" v-on:linkclicked="closeMenuAfterClick" />
+	<div class="switch-nav">
+		<ThemeSwitch />
+		<Nav :navActive="navActive" :hamActive="hamActive" :navLinks="navLinks" v-on:menutoggle="menuToggle" v-on:linkclicked="closeMenuAfterClick" />
+	</div>
 	<router-view v-slot="{Component}">
 		<transition :name="$route.meta.transitionName || 'fade'" :mode="$route.meta.transitionMode || 'out-in'">
 			<component :is="Component" />
@@ -68,6 +70,26 @@ body {
 	text-align: center;
 	color: var(--text-primary);
 	width: 100vw;
+	padding-top: 60px;
+	@include md {
+		padding-top: 80px;
+	}
+}
+
+.switch-nav {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 60px;
+	z-index: 999;
+	background: var(--bg-primary);
+	@include md {
+		height: 80px;
+	}
+	.light-theme & {
+		background: #e0e3f5;
+	}
 }
 
 a {
