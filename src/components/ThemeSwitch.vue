@@ -1,6 +1,6 @@
 <template>
 	<div class="contrast-switch">
-		<input @change="toggleTheme" id="contrast" type="checkbox" class="switch-checkbox" />
+		<input v-model="lightTheme" id="contrast" type="checkbox" class="switch-checkbox" />
 		<label for="contrast" class="switch-label">
 			<span>☀️</span>
 			<span>🌙</span>
@@ -15,15 +15,44 @@ export default {
 	data() {
 		return {
 			userTheme: 'dark-theme',
+			lightTheme: false,
 		}
 	},
+	mounted() {
+		const currentTheme = localStorage.getItem('user-theme')
+		console.log(currentTheme)
+		if (currentTheme == 'light-theme') {
+			this.lightTheme = true
+		} else if (currentTheme == 'dark-theme') {
+			this.lightTheme = false
+		} else {
+			const initUserTheme = this.getMediaPreference()
+			this.setTheme(initUserTheme)
+		}
+	},
+	watch: {
+		lightTheme: {
+			handler: function(newVal, oldVal) {
+				if (newVal == true) {
+					this.setTheme('light-theme')
+				} else {
+					this.setTheme('dark-theme')
+				}
+			},
+		},
+	},
 	methods: {
-		toggleTheme() {
-			if (this.userTheme == 'light-theme') {
-				this.userTheme = 'dark-theme'
+		getMediaPreference() {
+			const hasDarkPreference = window.matchMedia('(prefers-color-scheme: dark)').matches
+			if (hasDarkPreference) {
+				return 'dark-theme'
 			} else {
-				this.userTheme = 'light-theme'
+				return 'light-theme'
 			}
+		},
+		setTheme(theme) {
+			localStorage.setItem('user-theme', theme)
+			this.userTheme = theme
 			document.documentElement.className = this.userTheme
 		},
 	},

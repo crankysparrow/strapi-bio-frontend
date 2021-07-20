@@ -88,7 +88,7 @@ export default {
 }
 
 .team-member {
-	background: var(--bg-secondary);
+	background: var(--bg-subtler);
 	width: 100vw;
 	height: 100vh;
 	position: fixed;

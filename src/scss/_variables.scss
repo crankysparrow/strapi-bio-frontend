@@ -15,7 +15,8 @@ $darkblue: #1c147a;
 
 :root {
 	--bg-primary: #{$dark};
-	--bg-secondary: #{$darkblue};
+	--bg-secondary: #1c147a;
+	--bg-subtler: #28273b;
 	--text-primary: #{$white};
 	--text-secondary: #{$gray};
 	--accent: #{$tertiary};
@@ -27,6 +28,7 @@ $darkblue: #1c147a;
 :root.light-theme {
 	--bg-primary: #{$white};
 	--bg-secondary: #{$graylight};
+	--bg-subtler: #e0e3f5;
 	--text-primary: #{$dark};
 	--text-secondary: #{$tertiary};
 	--accent: #{$tertiary};
