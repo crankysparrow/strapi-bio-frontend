@@ -129,7 +129,7 @@ export default {
 			height: 60%;
 			top: -30px;
 			left: -40px;
-			background: $tertiary;
+			background: var(--accent);
 		}
 	}
 	.content {
@@ -144,7 +144,7 @@ export default {
 				height: 70%;
 				bottom: 0;
 				left: -10px;
-				background-color: $tertiary;
+				background-color: var(--accent);
 				content: '';
 				display: block;
 				position: absolute;

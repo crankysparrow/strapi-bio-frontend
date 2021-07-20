@@ -3,6 +3,7 @@
 $dark: #0f0e17;
 $white: #fffffe;
 $gray: #b7bad1;
+$graylight: #eef0ff;
 $gray2: #9fa3c1;
 $orange: #ff8906;
 $secondary: #f25f4c;
@@ -17,7 +18,7 @@ $darkblue: #1c147a;
 	--bg-secondary: #{$darkblue};
 	--text-primary: #{$white};
 	--text-secondary: #{$gray};
-	--accent: #{$orange};
+	--accent: #{$tertiary};
 	--accent-secondary: #{$secondary};
 	--accent-tertiary: #{$tertiary};
 	--contrastSize: 4rem;
@@ -25,12 +26,12 @@ $darkblue: #1c147a;
 
 :root.light-theme {
 	--bg-primary: #{$white};
-	--bg-secondary: #{$gray};
+	--bg-secondary: #{$graylight};
 	--text-primary: #{$dark};
 	--text-secondary: #{$tertiary};
-	--accent: #{$orange};
+	--accent: #{$tertiary};
 	--accent-secondary: #{$secondary};
-	--accent-tertiary: #{$orange};
+	--accent-tertiary: #{$tertiary};
 }
 
 $ease_out_back: cubic-bezier(0.34, 1.56, 0.64, 1);

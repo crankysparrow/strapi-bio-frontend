@@ -99,7 +99,7 @@ export default {
 						position: absolute;
 						width: 100%;
 						height: calc(100% - 10px);
-						background: $orange;
+						background: var(--accent);
 						left: 0;
 						bottom: 0;
 						z-index: -1;
